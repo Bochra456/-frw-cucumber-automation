@@ -1,5 +1,5 @@
 Feature: je verifie la page de connexion
-  Entant qu'utilisateur je souhaite de m authentifier au site mercury
+  Entant que utilisateur je souhaite de m authentifier au site mercury
 
   @connexion
   Scenario: je verifie la page de connexion

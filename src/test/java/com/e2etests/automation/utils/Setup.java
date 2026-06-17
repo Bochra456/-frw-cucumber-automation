@@ -1,6 +1,5 @@
 package com.e2etests.automation.utils;
 
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,10 +23,13 @@ public class Setup {
 
 	@Before
 	public void setWebDriver() {
+		 System.out.println("=== DEBUT SETUP ===");
 		String browser = System.getProperty("browser");
 		if(browser==null) {
 		   browser = "chrome";
 		}
+		System.out.println("Browser = " + browser);
+
 		switch(browser) {
 		
 		case "chrome":
@@ -36,23 +38,28 @@ public class Setup {
 			driver = new ChromeDriver(chromeOptions);
 			driver.manage().window().maximize();
 		break;
+		
 		case "firefox":
 			FirefoxProfile profile = new FirefoxProfile();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
-			firefoxOptions.setCapability("platform", Platform.WIN10);
+			//firefoxOptions.setCapability("platform", Platform.WIN10);
 			firefoxOptions.setProfile(profile);
 			driver = new FirefoxDriver(firefoxOptions);
+	        System.out.println("FirefoxDriver créé");
 			driver.manage().window().maximize();
 			
 			break;
 			
 		case "edge":
 			driver = new EdgeDriver();
+			 System.out.println("EdgeDriver créé");
 			driver.manage().window().maximize();
+			break;
 			
 			default:
 				throw new IllegalArgumentException("Browser\"" + browser+"\" is not supported.");
 		         }
+		System.out.println("=== FIN SETUP ===");
 	}
 	/*GETTER*/
 	public static WebDriver getDriver() {

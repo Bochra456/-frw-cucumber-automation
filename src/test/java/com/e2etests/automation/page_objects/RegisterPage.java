@@ -1,20 +1,22 @@
 package com.e2etests.automation.page_objects;
-		import static org.junit.jupiter.api.Assertions.assertEquals;
-        import java.util.jar.Attributes.Name;
-		import org.eclipse.jetty.util.security.Password;
-        import org.openqa.selenium.WebElement; 
-		import org.openqa.selenium.support.FindBy; 
-		import org.openqa.selenium.support.How;
-		import org.openqa.selenium.support.PageFactory;
-        import com.e2etests.automation.utils.ConfigFileReader1;
-		import com.e2etests.automation.utils.Setup;
-        import com.ibm.icu.message2.Mf2DataModel.Text; 
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import com.e2etests.automation.utils.ConfigFileReader1;
+import com.e2etests.automation.utils.Setup; 
 		public class RegisterPage {
 			private ConfigFileReader1 configFileReader1;
 			
 			/**@FindBy***/
 			
-			@FindBy(how = How.NAME,using = "firstName")
+			@FindBy(xpath = "//input[@name='firstName']")
 			public static WebElement firstname;
 			
 			@FindBy(how = How.NAME,using = "lastName")
@@ -45,89 +47,148 @@ package com.e2etests.automation.page_objects;
 			public static WebElement username;
 			
 			@FindBy(how = How.NAME,using = "password")
-			public static WebElement Password;
+			public static WebElement Passwordtxt;
 			
 			@FindBy(how = How.NAME,using = "confirmPassword")
-			public static WebElement Confirmpassword;
+			public static WebElement confirmpasswordtxt;
 			
 			@FindBy(how = How.NAME,using = "submit")
 			public static WebElement btnsubmit;
 			
-			@FindBy(how = How.TAG_NAME,using = "Note: Your user name is Bochra Laamiri.")
+			@FindBy(how = How.XPATH,using = "//font[contains(text(),'Thank you for registering.')]")
 			public static WebElement welcomeMsg;
 			
 			public RegisterPage() {
-				PageFactory.initElements(Setup.getDriver(), this); 
-				this.configFileReader1 = new ConfigFileReader1();
-			}
+			PageFactory.initElements(Setup.getDriver(), this); 
+			this.configFileReader1 = new ConfigFileReader1();
+							}
 			
 			/**Create Methods **/
 			public void goToUrl() {
-				Setup.getDriver().get(configFileReader1.getProperties("home.url"));
+			
+				    Setup.getDriver().get(configFileReader1.getProperties("home.url"));
+
+				    WebDriverWait wait = new WebDriverWait(
+				            Setup.getDriver(),
+				            Duration.ofSeconds(10));
+
+				    wait.until(ExpectedConditions.urlContains("register"));
+				
 			}
 			
 			/**Actions**/
 			public void fillName(String firstName) {
+				
+				WebDriverWait wait = new WebDriverWait(
+				      Setup.getDriver(),Duration.ofSeconds(10));
+
+				    wait.until(ExpectedConditions.visibilityOf(firstname));
 		        firstname.sendKeys(firstName);
 		    }
 			public void filllastname(String lastName) {
+				WebDriverWait wait = new WebDriverWait(
+				        Setup.getDriver(),
+				        Duration.ofSeconds(10));
+
+				    wait.until(ExpectedConditions.visibilityOf(lastname));
 		        lastname.sendKeys(lastName);
 		    }
 
 		    public void fillPhone(String phoneNumber) {
+		    	WebDriverWait wait = new WebDriverWait(
+		    	 Setup.getDriver(),
+		    	 Duration.ofSeconds(10));
+			    wait.until(ExpectedConditions.visibilityOf(phone));
 		        phone.sendKeys(phoneNumber);
 		    }
 
 		    public void fillEmail(String emailTxt) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    Setup.getDriver(),
+				    Duration.ofSeconds(10));
+					wait.until(ExpectedConditions.visibilityOf(email));
 		        email.sendKeys(emailTxt);
 		    }
 
-		    public void fillAddress(String addressTxt) {
-		        address.sendKeys(addressTxt);
+		    public void fillAddresse(String addressTxt) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(adresse));
+		    	adresse.sendKeys(addressTxt);
 		    }
 
 		    public void fillCity(String cityTxt) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(city));
 		        city.sendKeys(cityTxt);
 		    }
 
-		    public void fillState(String stateTxt) {
-		        state.sendKeys(stateTxt);
-		    }
-
 		    public void fillcodepostale(String postalCodeTxt) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(codepostale));
 		    	codepostale.sendKeys(postalCodeTxt);
 		    }
 
 		    public void fillCountry(String countryTxt) {
-		        country.sendKeys(countryTxt);
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(country));
+					    Select select = new Select(country);
+					    select.selectByValue("TUNISIA");
 		    }
 		    
-		    public void fillprovince(String province) {
-		        province.sendKeys(province);
+		    public void fillProvince(String provinceX) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(province));
+		        province.sendKeys(provinceX);
 		    }
 
 		    public void fillUsername(String usernameTxt) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(username));
 		        username.sendKeys(usernameTxt);
 		    }
 
-		    public void fillpassword(String password) {
-		        password.sendKeys(password);
+		    public void fillPasswordtxt(String passwordtxt) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(Passwordtxt));
+		    	Passwordtxt.sendKeys(passwordtxt);
 		    }
 
-		    public void fillConfirmPassword(String confirmPasswordTxt) {
-		        confirmPassword.sendKeys(confirmPasswordTxt);
+		    public void fillconfirmpasswordtxt(String confirmPassword) {
+		    	WebDriverWait wait = new WebDriverWait(
+				    	 Setup.getDriver(),
+				    	 Duration.ofSeconds(10));
+					    wait.until(ExpectedConditions.visibilityOf(confirmpasswordtxt));
+		        confirmpasswordtxt.sendKeys(confirmPassword);
 		    }
 
 
 		    public void clickbtnsubmit() {
 		        btnsubmit.click();
 		    }
-
-		    public String getMessagetxt() {
-		        return welcomeMsg.getText();
-		        
-		        assertEquals(welcomeMsg, Text);
+		    
+		    public boolean welcomeMsgIsDisplayed() {
+		        return welcomeMsg.isDisplayed();
 		    }
+
+		    public String getWelcomeMessage() {
+		        return welcomeMsg.getText();
+		    }
+
+		   
 		}
 			
 		
