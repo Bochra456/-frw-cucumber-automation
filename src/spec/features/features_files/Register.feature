@@ -1,4 +1,4 @@
- Feature: verifier le module register
+Feature: verifier le module register
 en tant que utilisateur je souhaite remplir le formulaire a fin m enregister au site mercury
   
  @register
